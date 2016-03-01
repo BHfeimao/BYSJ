@@ -1,0 +1,43 @@
+﻿<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<title>疾病知识</title>
+<h2 style="background-color:#2a2828;color:white;font-size:31.5px;line-height:40px;margin:2px -8px">疾病知识</h2>
+
+<p>
+    @Html.ActionLink("添加", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            摘要
+        </th>
+
+        <th>操作</th>
+    </tr>
+</table>
+<br />
+@Html.ActionLink("返回索引页", "Index", "Data")
+<hr />
+<script>
+    $(function () {
+        $.ajax({
+            type: "POST",
+            url: "/Home/GetAllIllnessStu",
+            data: "",
+            success: function (data) {
+                if (data) {
+                    FillIllnessStu(data);
+                }
+            }
+        });
+    });
+    function FillIllnessStu(data) {
+        var length = data.length;
+        for (var i = 0; i < length; i++) {
+            var edit = "<a href = '/IllnessStus/Edit/" + data[i].ID + "'>编辑  </a>";
+            var details = "<a href = '/IllnessStus/Details/" + data[i].ID + "'>查看  </a>";
+            var del = "<a href = '/IllnessStus/Delete/" + data[i].ID + "'>删除</a>";
+            var str = "<tr><td>" + data[i].summary + "</td><td>" + edit + details + del + "</td><tr/>"
+            $(".table").append(str);
+        }
+    }
+</script>

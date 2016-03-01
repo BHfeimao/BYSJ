@@ -1,0 +1,34 @@
+﻿@model PM25.Controllers.HomeController.BTModel
+@{
+    ViewBag.Title = "体温与疾病-详细";
+}
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/Content/Detail.css")
+<div class="con-L">
+    <h1>
+        <span class="title">百科知识</span>
+        <span class="more">@Html.ActionLink("MORE", "More", "Home")</span>
+    </h1>
+    <ul>
+        @foreach (var n in Model.Pedias)
+        {
+            ViewBag.i++;
+            if (ViewBag.i > 12) { break; }
+            <li><nobr><a href="~/More/Show/@n.ID">@MvcHtmlString.Create(n.title)</a>
+                </nobr></li>
+        }
+    </ul>
+</div>
+<div class="con-R">
+    <div class="detail">
+    @foreach (var item in Model.BodyTems) {
+        if (item.ID == ViewBag.id) {
+            @MvcHtmlString.Create(item.detail)
+        }
+    }
+    </div>
+</div>
+                

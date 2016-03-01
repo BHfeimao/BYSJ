@@ -1,0 +1,43 @@
+﻿<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<title>新闻动态</title>
+<h2 style="background-color:#2a2828;color:white;font-size:31.5px;line-height:40px;margin:2px -8px">新闻动态</h2>
+
+<p>
+    @Html.ActionLink("添加", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            摘要
+        </th>
+
+        <th>操作</th>
+    </tr>
+</table>
+<br />
+@Html.ActionLink("返回索引页", "Index", "Data")
+<hr />
+<script>
+    $(function () {
+        $.ajax({
+            type: "POST",
+            url: "/Home/GetAllNew",
+            data: "",
+            success: function (data) {
+                if (data) {
+                    FillNew(data);
+                }
+            }
+        });
+    });
+    function FillNew(data) {
+        var length = data.length;
+        for (var i = 0; i < length; i++) {
+            var edit = "<a href = '/News/Edit/" + data[i].ID + "'>编辑  </a>";
+            var details = "<a href = '/News/Details/" + data[i].ID + "'>查看  </a>";
+            var del = "<a href = '/News/Delete/" + data[i].ID + "'>删除</a>";
+            var str = "<tr><td>" + data[i].summary + "</td><td>" + edit + details + del + "</td><tr/>"
+            $(".table").append(str);
+        }
+    }
+</script>

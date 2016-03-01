@@ -1,0 +1,42 @@
+﻿
+.con-R ul{
+    margin:20px 10px;
+    padding-left:30px;
+}
+.con-R li{
+    list-style:none;
+    overflow:hidden;
+    margin-bottom:10px;
+}
+.con-R li .R{
+    width:120px;
+    height:100px;
+    border:2px solid #2a2828;
+    float:left;
+}
+
+.con-R li .img{
+    background-color:black;
+    width:120px;
+    height:100px;
+    display: table-cell;
+    vertical-align:middle;
+    text-align:center;
+    overflow:hidden;
+}
+.con-R li img{
+    max-width:118px;
+    max-height:98px;
+    border:1px solid #ffffff;
+}
+.con-R li p{
+    overflow:hidden;
+    padding:10px 20px;
+    line-height:23px;
+}
+.con-R li p a{
+    text-decoration:none;
+}
+.con-R li p a:hover{
+    color:red;
+}

@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale：1.0,user-scalable=no">
+    <title>@ViewBag.Title</title>
+    <link rel="icon" href="~/Content/Img/logo-ico.ico" type="image/x-icon"/>
+    @Styles.Render("~/Content/Site.css")
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+</head>
+<body>
+    <div class="header">
+        <div class="title"><h1>河北省科普展教资源开发原创与共享科普专项项目</h1></div>
+        <div class="logo">
+            <img src="~/Content/Img/logo.jpg">
+        </div>
+        <div class="navigation-bar">
+            <h2>关注我们的健康</h2>
+            <ul>
+                <li>@Html.ActionLink("首页", "Index", "Home")</li>
+                <li>@Html.ActionLink("体温与疾病", "BodyTem", "Home")</li>
+                <li>@Html.ActionLink("红外热医学应用", "Infra", "Home")</li>
+                <li>@Html.ActionLink("前沿研究", "Now", "Home")</li>
+                <li>@Html.ActionLink("新闻动态", "New", "Home")</li>
+                <li>@Html.ActionLink("红外知识", "InfraStu", "Home")</li>
+                <li>@Html.ActionLink("疾病知识", "IllnessStu", "Home")</li>
+            </ul>
+        </div>
+    </div>
+    <!--以上为Header部分-->
+    <div class="render-body">
+        @RenderBody()
+    </div>
+    <div class="footer">
+        <h2>欢迎您访问我们的科普网站</h2>
+        <img src="~/Content/Img/logo_2.gif">
+        <br />
+        <p>
+            正确认识人体体温的变化，了解人体体温变化的相关概念，对保护人们的身体健康，预防和减少疾病危害具有重要意义。但大量的专业术语和专业领域知识使得人们对这一问题不甚理解，对人们了解和掌握相关概念及知识造成了一定的障碍。如何使更多的人民群众对人体体表温度加深认识，了解并掌握其相关知识，是目前医疗的一项重要课题。本课题计划利用计算机网络这种应用广泛的信息传输工具，建立一个人体体表温度相关知识介绍的科普网站。该网站以深入浅出的方式宣传体表温度相关概念和知识。本网站实施后能让广大人民群众很方便地了解体表温度的形成原因、与各种疾病的关系等知识，为实现全民保健、预防、检查和治疗疾病做出贡献。
+        </p>
+    </div>
+</body>
+</html>

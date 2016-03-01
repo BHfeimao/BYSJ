@@ -1,0 +1,70 @@
+﻿@{
+    ViewBag.Title = "更多百科知识";
+}
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<img class="DHimg" src="~/Content/Img/Home.png" />
+<div class="DaoHang">
+    <p style="display:inline;color:#505050">当前位置：</p>
+    <a href="~/home/index">首 页</a> > <a href="/home/More">更多百科</a> > <span style="color:#505050">查看百科</span>
+</div>
+<div class="con-L">
+    <div class="con-LU">
+        <h1>
+            <span class="title">更多百科知识</span>
+        </h1>
+        <ul id="title"></ul>
+    </div>
+    <div class="con-LD">
+        <h4 style="margin:10px 0;color:#ff6a00">☺ 温馨小提示：</h4>
+        <hr />
+        <hr />
+        <p style="text-indent: 32px;line-height:1.7em">
+            为使您达到最佳浏览效果，建议使用IE8及以上版本浏览器1440*900以上分辨率浏览；
+            如使用低分辨率浏览时时发现图片显示不完全属正常现象，不影响网站功能的实现；
+            目前本站点样式尚不适应手机、Pad端浏览。
+        </p>
+    </div>
+</div>
+<div class="con-R">
+    <div id="text" class="detail">
+    </div>
+</div>
+<script>
+     $(function () {
+        $.ajax({
+            type: "POST",
+            url: "/Home/GetAllPedia",
+            data: "",
+            success: function (data) {
+                if (data) {
+                    FillPedia(data);
+                }
+            }
+        });
+    });
+     function FillPedia(data) {
+        var length = data.length;
+        for (var i = length - 1; i >= 0; i--) {
+            var str = "<span>" + data[i].createTime + "</span><li id='"+ data[i].ID +"'><nobr><a onclick='FillPart("+ data[i].ID +")'>" + data[i].title + "</a></nobr></li>";
+            $("#title").append(str);
+        }
+        var id = @ViewBag.ID ? @ViewBag.ID : data[length-1].ID;
+        FillPart(id)
+    }
+    function FillPart(id) {
+        $(".con-LU li").css("color","#1a87ff");
+        $(".con-LU li#"+id).css("color","#0e0e0e");
+        $.ajax({
+            type: "POST",
+            url: "/Home/GetPediaById",
+            data:"ID="+id,
+            success:function(data){
+                if(data){
+                    $("#text").html(data.text).scrollTop(0);
+                }
+            }
+        });
+    }
+</script>

@@ -1,0 +1,13 @@
+
+.detail {
+    margin:20px 30px ;
+    line-height:1.7em;
+}
+.detail img { 
+        padding-top:10px;
+        max-width:500px;  
+        max-height:400px; 
+        display:table-cell;
+        margin: 0 auto;       
+    }
+

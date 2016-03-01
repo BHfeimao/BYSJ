@@ -1,0 +1,38 @@
+﻿@Styles.Render("~/Content/Show.css")
+@{
+    ViewBag.Title = "百科知识";
+}
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<img class="DHimg" src="~/Content/Img/Home.png" />
+<div class="DaoHang">
+    <p style="display:inline;color:#505050">当前位置：</p>
+    <a href="~/home/index">首 页</a> > <a href="/home/more">更多百科</a> > <span style="color:#505050">查看百科</span>
+</div>
+<div class="map-text-play">
+    <div class="map-text">
+        <h1></h1>
+        @*@MvcHtmlString.Create(@Model.text)*@
+    </div>
+</div>
+<script>
+    $(function () {
+        $.ajax({
+            type: "POST",
+            url: "/Home/GetPediaById",
+            data: "ID=" + @ViewBag.ID ,
+            success: function (data) {
+                if (data) {
+                    FillPedia(data);
+                }
+            }
+        });
+    });
+    function FillPedia(data) {
+        $(".map-text h1").text(data.title);
+        $(".map-text").append(data.text);
+    }
+</script>
+
+

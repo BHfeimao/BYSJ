@@ -1,0 +1,61 @@
+﻿<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<title>删除</title>
+<h2 style="background-color:#2a2828;color:white;font-size:31.5px;line-height:40px;margin:2px -8px">删除</h2>
+<h3>你确定要删除以下内容？</h3>
+<div>
+    <h4>New</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            摘要
+        </dt>
+
+        <dd id="summary">
+        </dd>
+
+        <dt>
+            详细
+        </dt>
+
+        <dd id="detail">
+        </dd>
+
+    </dl>
+    <div class="form-actions no-color">
+        <input type="submit" value="删除" class="btn btn-default" /> |
+        @Html.ActionLink("返回", "Index")
+        <hr />
+    </div>
+</div>
+<script>
+    $(function () {
+        $.ajax({
+            type: "POST",
+            url: "/Home/GetNewById",
+            data: "ID=" + @ViewBag.ID ,
+            success: function (data) {
+                if (data) {
+                    FillNew(data);
+                }
+            }
+        });
+
+        $("input.btn").click(function () {
+            $.ajax({
+                type: "POST",
+                url: "/Home/DeleteNew",
+                data:"ID=" + @ViewBag.ID,
+                success: function(data){
+                    if(data){
+                        alert("删除成功！");
+                        window.location.href = "../";
+                    }
+                }
+            });
+        });
+    });
+    function FillNew(data) {
+        $("#summary").text(data.summary);
+        $("#detail").append(data.detail);
+    }
+</script>

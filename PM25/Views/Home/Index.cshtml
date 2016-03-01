@@ -1,0 +1,244 @@
+﻿@{
+    ViewBag.Title = "首页";
+}
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<img class="DHimg" src="~/Content/Img/Home.png" />
+<div class="DaoHang"><p style="display:inline;color:#505050">当前位置：</p><a href="">首 页</a></div>
+<div class="con-L">
+    <div class="con-LUO">
+        <h1>
+            <span class="title">百科知识 </span>
+            <span class="more">@Html.ActionLink("MORE", "More", "Home")</span>
+        </h1>
+        <ul>
+            <li>
+                <nobr>
+                    <a href="~/More/Show/"></a>
+                </nobr>
+            </li>
+        </ul>
+    </div>
+    <div class="con-LD">
+        <h4 style="margin:10px 0;color:#ff6a00">☺ 温馨小提示：</h4>
+        <hr />
+        <hr />
+        <p style="text-indent: 32px;line-height:1.7em">
+            为使您达到最佳浏览效果，建议使用IE8及以上版本浏览器1440*900以上分辨率浏览；
+            如使用低分辨率浏览时时发现图片显示不完全属正常现象，不影响网站功能的实现；
+            目前本站点样式尚不适应手机、Pad端浏览。
+        </p>
+    </div>
+</div>
+<!-- 以下是右边部分 -->
+<div class="con-R">
+    <div class="con-RS">
+        <!-- 体温与疾病 -->
+        <div class="con-RM">
+            <h4 class="title">体温与疾病</h4>
+            <hr />
+            <hr />
+            <div style="width:500px;padding:10px 0;display: table-cell;text-align:center">
+                <img src="~/Content/Img/体温与疾病.jpg" />
+            </div>
+            <ul id="BodyTem" style="clear:both"></ul>
+            <div class="span"><a href="/Home/BodyTem">更多精彩■</a></div>
+        </div>
+        <!-- 红外热学应用 -->
+        <div class="con-RM">
+            <h4 class="title">红外热学应用</h4>
+            <hr />
+            <hr />
+            <div style="width:500px;padding:10px 0;display: table-cell;text-align:center">
+                <img src="~/Content/Img/红外医学应用.jpg" />
+            </div>
+            <ul id="Infra" style="clear:both"></ul>
+            <div class="span"><a href="/Home/Infra">更多精彩■</a></div>
+        </div>
+    </div>
+    <div class="con-RS">
+        <!-- 前沿研究 -->
+        <div class="con-RM">
+            <h4 class="title">前沿研究<span style="color:#808080;font-size:small">(提供资料下载)</span></h4>
+            <hr />
+            <hr />
+            <div style="width:500px;padding:10px 0;display: table-cell;text-align:center">
+                <img src="~/Content/Img/前沿研究.jpg" />
+            </div>
+            <ul id="Now" style="clear:both"></ul>
+            <div class="span"><a href="/Home/Now">更多精彩■</a></div>
+        </div>
+        <!-- 新闻动态 -->
+        <div class="con-RM">
+            <h4 class="title">新闻动态</h4>
+            <hr />
+            <hr />
+            <div style="width:500px;padding:10px 0;display: table-cell;text-align:center">
+                <img src="~/Content/Img/新闻动态.jpg" />
+            </div>
+            <ul id="New" style="clear:both"></ul>
+            <div class="span"><a href="/Home/New">更多精彩■</a></div>
+        </div>
+    </div>
+    <div class="con-RS">
+        <!-- 红外知识 -->
+        <div class="con-RM">
+            <h4 class="title">红外知识</h4>
+            <hr />
+            <hr />
+            <div style="width:500px;padding:10px 0;display: table-cell;text-align:center">
+                <img src="~/Content/Img/红外知识.jpg" />
+            </div>
+            <ul id="InfraStu" style="clear:both"></ul>
+            <div class="span"><a href="/Home/InfraStu">更多精彩■</a></div>
+        </div>
+        <!-- 疾病知识 -->
+        <div class="con-RM">
+            <h4 class="title">疾病知识</h4>
+            <hr />
+            <hr />
+            <div style="width:500px;padding:10px 0;display: table-cell;text-align:center">
+                <img src="~/Content/Img/疾病知识.jpg" />
+            </div>
+            <ul id="IllnessStu" style="clear:both"></ul>
+            <div class="span"><a href="/Home/IllnessStu">更多精彩■</a></div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        //获取百科
+        $.ajax({
+            type: "POST",
+            url: "/Home/GetAllPedia",
+            data: "",
+            success: function (data) {
+                if (data) {
+                    FillPedia(data);
+                }
+            }
+        });
+        //获取体温与疾病
+        $.ajax({
+            type: "POST",
+            url: "/Home/GetAllBodyTem",
+            data: "",
+            success: function (data) {
+                if (data) {
+                    FillBodyTem(data);
+                }
+            }
+        });
+        //获取红外医学应用
+        $.ajax({
+            type: "POST",
+            url: "/Home/GetAllInfra",
+            data: "",
+            success: function (data) {
+                if (data) {
+                    FillInfra(data);
+                }
+            }
+        });
+        //获取新闻动态
+        $.ajax({
+            type: "POST",
+            url: "/Home/GetAllNew",
+            data: "",
+            success: function (data) {
+                if (data) {
+                    FillNew(data);
+                }
+            }
+        });
+        //获取红外知识
+        $.ajax({
+            type: "POST",
+            url: "/Home/GetAllInfraStu",
+            data: "",
+            success: function (data) {
+                if (data) {
+                    FillInfraStu(data);
+                }
+            }
+        });
+        //获取疾病知识
+        $.ajax({
+            type: "POST",
+            url: "/Home/GetAllIllnessStu",
+            data: "",
+            success: function (data) {
+                if (data) {
+                    FillIllnessStu(data);
+                }
+            }
+        });
+        //获取前沿研究
+        $.ajax({
+            type: "POST",
+            url: "/Home/GetAllNow",
+            data: "",
+            success: function (data) {
+                if (data) {
+                    FillNow(data);
+                }
+            }
+        });
+    });
+    function FillPedia(data) {
+        var length = data.length;
+        for (var i = length - 1; i >= 0 && i > length - 23; i--) {
+            var str = "<span>" + data[i].createTime + "</span><li id =" + data[i].ID + "><nobr><a href='/Home/More/" + data[i].ID + "'>" + data[i].title + "</a></nobr></li>";
+            $(".con-L ul").append(str);
+        }
+    }
+    function FillBodyTem(data) {
+        var length = data.length;
+        for (var i = length - 1; i >= 0 && i > length - 7; i--) {
+            var str = "<span>" + data[i].createTime + "</span><li><a href ='/Home/BodyTem/" + data[i].ID + "'>" + data[i].summary + "</a>" +
+                "</li>";
+            $("#BodyTem").append(str);
+        }
+    }
+    function FillInfra(data) {
+        var length = data.length;
+        for (var i = length - 1; i >= 0 && i > length - 7; i--) {
+            var str = "<span>" + data[i].createTime + "</span><li><a href ='/Home/Infra/" + data[i].ID + "'>" + data[i].summary + "</a>" +
+                "</li>";
+            $("#Infra").append(str);
+        }
+    }
+    function FillNew(data) {
+        var length = data.length;
+        for (var i = length - 1; i >= 0 && i > length - 7; i--) {
+            var str = "<span>" + data[i].createTime + "</span><li><a href ='/Home/New/" + data[i].ID + "'>" + data[i].summary + "</a>" +
+                "</li>";
+            $("#New").append(str);
+        }
+    }
+    function FillInfraStu(data) {
+        var length = data.length;
+        for (var i = length - 1; i >= 0 && i > length - 7; i--) {
+            var str = "<span>" + data[i].createTime + "</span><li><a href ='/Home/InfraStu/" + data[i].ID + "'>" + data[i].summary + "</a>" +
+                "</li>";
+            $("#InfraStu").append(str);
+        }
+    }
+    function FillIllnessStu(data) {
+        var length = data.length;
+        for (var i = length - 1; i >= 0 && i > length - 7; i--) {
+            var str = "<span>" + data[i].createTime + "</span><li><a href ='/Home/IllnessStu/" + data[i].ID + "'>" + data[i].summary + "</a>" +
+                "</li>";
+            $("#IllnessStu").append(str);
+        }
+    }
+    function FillNow(data) {
+        var length = data.length;
+        for (var i = length - 1; i >= 0 && i > length - 7; i--) {
+            var str = "<span>" + data[i].createTime + "</span><li><a href ='/Home/Now/" + data[i].ID + "'>" + data[i].title + "</a>" +
+                "</li>";
+            $("#Now").append(str);
+        }
+    }
+</script>

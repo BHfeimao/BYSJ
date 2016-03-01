@@ -1,0 +1,64 @@
+﻿<title>删除</title>
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<h2 style="background-color:#2a2828;color:white;font-size:31.5px;line-height:40px;margin:2px -8px">删除</h2>
+<h3>你确定要删除以下内容？</h3>
+<div>
+    <h4>百科</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            标题：
+        </dt>
+
+        <dd id="title">
+            <!-- title占位 -->
+        </dd>
+
+        <dt>
+            内容：
+        </dt>
+
+        <dd id="text">
+            <!-- text占位 -->
+            @*@MvcHtmlString.Create(@Model.text)*@
+        </dd>
+
+    </dl>
+    <div class="form-actions no-color">
+        <input type="submit" value="删除" class="btn btn-default" /> |
+        @Html.ActionLink("返回", "Index")
+        <hr />
+    </div>
+</div>
+<script>
+    $(function () {
+        $.ajax({
+            type: "POST",
+            url: "/Home/GetPediaById",
+            data: "ID=" + @ViewBag.ID ,
+            success: function (data) {
+                if (data) {
+                    FillPedia(data);
+                }
+            }
+        });
+        
+        $("input.btn").click(function () {
+            $.ajax({
+                type: "POST",
+                url: "/Home/DeletePedia",
+                data:"ID=" + @ViewBag.ID,
+                success: function(data){
+                    if(data){
+                        alert("删除成功！");
+                        window.location.href = "../";
+                    }
+                }
+            });
+        });
+    });
+    function FillPedia(data) {
+        $("#title").text(data.title);
+        $("#text").append(data.text);
+    }
+</script>

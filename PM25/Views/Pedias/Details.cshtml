@@ -1,0 +1,48 @@
+﻿<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<title>查看</title>
+<h2 style="background-color:#2a2828;color:white;font-size:31.5px;line-height:40px;margin:2px -8px">查看</h2>
+<div>
+    <h4>百科</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            titleName
+        </dt>
+
+        <dd id="title">
+            
+        </dd>
+
+        <dt>
+            textName
+        </dt>
+
+        <dd id="text">
+            @*@MvcHtmlString.Create(@Model.text)*@
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("编辑", "Edit", new { id = ViewBag.ID }) |
+    @Html.ActionLink("返回", "Index")
+    <hr />
+</p>
+<script>
+    $(function () {
+        $.ajax({
+            type: "POST",
+            url: "/Home/GetPediaById",
+            data: "ID=" + @ViewBag.ID ,
+            success: function (data) {
+                if (data) {
+                    FillPedia(data);
+                }
+            }
+        });
+        function FillPedia(data) {
+            $("#title").text(data.title);
+            $("#text").append(data.text);
+        }
+    });
+</script>

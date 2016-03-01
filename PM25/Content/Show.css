@@ -1,0 +1,30 @@
+﻿.map-text-play{
+    border: 1px solid #d1d1d1;  
+    padding: 10px 20px;
+    background-color:#f7f7f7;
+    padding: 3% 5% 0;
+    letter-spacing: 1px;
+    padding-bottom: 20px;
+}
+
+.map-text{
+    list-style-type: none;
+    font-weight:normal ;
+    line-height:1.7em;
+}
+
+.map-text  h1 {
+    font-weight:bold ;
+    color: black;
+    font-size: 20px;
+    margin: 10px 0;
+}
+.map-text img  {
+        padding-top:10px;
+        max-width:800px;  
+        max-height:400px; 
+        display:table-cell;
+        margin: 0 auto; 
+}
+
+
